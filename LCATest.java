@@ -8,5 +8,20 @@ public class LCATest {
 	public void test() {
 		fail("Not yet implemented");
 	}
+	@Test
+	public void testContains() {
+		
+	}
+	
+	@Test
+	public void testLCA() {
+		// add test
+	}
+	
+	@Test
+	public void testHeight() {
+		
+	}
+	
 
 }
