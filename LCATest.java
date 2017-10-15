@@ -16,8 +16,8 @@ public class LCATest {
 		LCA.put(4, 4);   //   2   4
 		LCA.put(5, 5);   //        \
 		//        				 	5
-		assertEquals("Testing LCA left side", 3, LCA.LowestCommonAncestor(2,6));
-		assertEquals("Testing LCA right side", 7, LCA.LowestCommonAncestor(8,3));
+		assertEquals("Testing LCA left side", 3, LCA.LowestCommonAncestor(2,6).toString());
+		assertEquals("Testing LCA right side", 7, LCA.LowestCommonAncestor(8,3).toString());
 	}
 
 
