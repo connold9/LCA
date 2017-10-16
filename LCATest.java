@@ -6,7 +6,11 @@ public class LCATest {
 
 	@Test
 	public void testLCA() {
+		
 		LCA<Integer, Integer> bst = new LCA<Integer, Integer>();
+		
+		assertSame("Testing LCA for null root", null, bst.lowestCommonAncestor(bst.root, 1, 2));
+		
 		bst.put(7, 7);   //        _7_
 		bst.put(8, 8);   //      /     \
 		bst.put(3, 3);   //    _3_      8
