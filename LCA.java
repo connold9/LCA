@@ -288,6 +288,12 @@ public class LCA <Key extends Comparable<Key>, Value>{
 	 	public Key lowestCommonAncestor (Node node, Key key1, Key key2){
 	 		if (node == null)
 	             return null;
+	 		if (node.key == key1) {
+	 			return node.key;
+	 		}
+	 		if (node.key == key2) {
+	 			return node.key;
+	 		}
 	 		int cmp1 = node.key.compareTo(key1);
 	 		int cmp2 = node.key.compareTo(key2);
 	 		

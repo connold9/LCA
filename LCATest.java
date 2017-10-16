@@ -22,6 +22,7 @@ public class LCATest {
 		//        				 	5
 		assertSame("Testing LCA left side", 3, bst.lowestCommonAncestor(bst.root, 2,6));
 		assertSame("Testing LCA right side", 7, bst.lowestCommonAncestor(bst.root, 8,3));
+		assertSame("Testing LCA where LCA is one of the nodes", 7, bst.lowestCommonAncestor(bst.root, 7,8));
 	}
 
 
