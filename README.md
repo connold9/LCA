@@ -30,14 +30,12 @@ The directed graph will have nodes pointing to one and other similar to the bina
 
 <b>Some Changes</b>
 
-I will need to adjust my node class and my LCA class. I will construct some tests I expect to happen. In previous request, I tested the some of the node class requirements with in the LCATest. As there is more requirements in this assignment, I will give the node class its own test class. As my previous assignment was designed for a BT I will need make changes to both classes.
+I will need to adjust my node class and my LCA class. I will construct some tests I expect to happen. In previous request, I tested the some of the node class requirements with in the LCATest. For this task it may better to move the node definition to its own separate class but I am as of now unsure.
 
 <b>Tests</b>
 
-Node Class - I will be making this a generic type to better suit more sources. As a peer pointed out that I should not limit the ability of the program to just integers
+1 - Test the constructor
 
-Test the constructor
+2 - Test for when adding/connecting two nodes together
 
-Test for when adding/connecting two nodes together
-
-Test for when disconnecting two nodes from one and other
+3 - Test for when disconnecting two nodes from one and other
