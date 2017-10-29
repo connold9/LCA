@@ -1,12 +1,13 @@
-import java.util.*;
-import java.lang.*;
+import java.util.ArrayList;
 
 public class LCA <Key extends Comparable<Key>, Value>{
 
-	public LinkedHashSet<Key> keySet = new LinkedHashSet<Key>();	// all nodes in graph
-	private LinkedHashSet<Key> orphanSet = new LinkedHashSet<Key>();	// all nodes with no requirement nodes
+
+	//public LinkedHashSet<Key> keySet = new LinkedHashSet<Key>();	// all nodes in graph
+	//private LinkedHashSet<Key> orphanSet = new LinkedHashSet<Key>();	// all nodes with no requirement nodes
 	
-	Node root;             				
+	Node root;
+
 
 	class Node {
 		private Key key;           				
@@ -21,7 +22,7 @@ public class LCA <Key extends Comparable<Key>, Value>{
 		}
 
 	}
-	//Constructor for DAG
+	//Constructor for DAG, not sure if this will be kept.
 	public Object DirAcycGraph () {
 		Object dirAcycGraph = new Object();
 		return dirAcycGraph;
@@ -97,6 +98,19 @@ public class LCA <Key extends Comparable<Key>, Value>{
 		node.N = 1 + size(node.left) + size(node.right); // value child1 + value child2 + 1
 		return node;
 	}
+	
+	/*public void putDAG(Key newKey, Value newValue) throws IllegalArgumentException
+	{
+		if (!contains(newKey))
+		{
+			keySet.add(newKey);
+			orphanSet.add(newKey);
+			newKey.Value = newValue;
+		}
+		else
+			throw new IllegalArgumentException("Key contained in graph already, or key is null");
+	}
+	*/
 
 	/**
 	 * Tree height.
@@ -315,5 +329,6 @@ public class LCA <Key extends Comparable<Key>, Value>{
 	   
 	         return node.key;
 	 	}
+	 	
 	
 }
