@@ -1,7 +1,11 @@
+import java.util.*;
+import java.lang.*;
 
 public class LCA <Key extends Comparable<Key>, Value>{
 
-
+	public LinkedHashSet<Key> keySet = new LinkedHashSet<Key>();	// all nodes in graph
+	private LinkedHashSet<Key> orphanSet = new LinkedHashSet<Key>();	// all nodes with no requirement nodes
+	
 	Node root;             				
 
 	class Node {
@@ -17,6 +21,12 @@ public class LCA <Key extends Comparable<Key>, Value>{
 		}
 
 	}
+	//Constructor for DAG
+	public Object DirAcycGraph () {
+		Object dirAcycGraph = new Object();
+		return dirAcycGraph;
+	}
+	
 	public boolean isEmpty() { 
 		return size() == 0; 
 	}
