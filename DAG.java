@@ -38,4 +38,16 @@ public class DAG <Value> {
 		}
 		return valInList;
 	}
+	
+	// Needed a way to convert from value to a Node, so this method returns the assocaited node given a value.
+		public Node retrieveNodefromVal (Value v){
+			Node nodeToRet = new Node(null); 				
+			for (int i=0; i<nodeList.length; i++){
+				if (nodeList[i].val == v){
+					nodeToRet = nodeList[i];
+					break;			
+				}	
+			}
+			return nodeToRet;
+		}
 }

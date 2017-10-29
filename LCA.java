@@ -102,18 +102,7 @@ public class LCA <Key extends Comparable<Key>, Value>{
 		return node;
 	}
 	
-	/*public void putDAG(Key newKey, Value newValue) throws IllegalArgumentException
-	{
-		if (!contains(newKey))
-		{
-			keySet.add(newKey);
-			orphanSet.add(newKey);
-			newKey.Value = newValue;
-		}
-		else
-			throw new IllegalArgumentException("Key contained in graph already, or key is null");
-	}
-	*/
+
 
 	/**
 	 * Tree height.
