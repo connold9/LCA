@@ -22,9 +22,17 @@ public class LCA <Key extends Comparable<Key>, Value>{
 		}
 
 	}
+	
+	class DAG {
+		private Node root;
+		public DAG(Node root) {
+			this.root = root;
+		}
+	}
 	//Constructor for DAG, not sure if this will be kept.
-	public Object DirAcycGraph () {
+	public Object DirAcycGraph(Node root) {
 		Object dirAcycGraph = new Object();
+		
 		return dirAcycGraph;
 	}
 	
