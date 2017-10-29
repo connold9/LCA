@@ -50,4 +50,25 @@ public class DAG <Value> {
 			}
 			return nodeToRet;
 		}
+		
+		public void put(Value v, Value fromVal, Value toVal) {	
+			Node n = new Node(v);
+			Node from = retrieveNodefromVal(fromVal);
+			Node to = retrieveNodefromVal(toVal);
+			
+			if (fromVal != null) {
+				from.successors = extendArray(from.successors); //need a method to extend array
+				from.successors[from.successors.length-1] = n;
+				// If 'from' Node is not already in the graph.
+				if (from.val == null) {
+					
+				}
+			}
+			
+			if (toVal != null) {
+					//has nowhere to get connected to?
+				}
+			}
+				
+		}
 }
