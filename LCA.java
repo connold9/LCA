@@ -30,11 +30,6 @@ public class LCA <Key extends Comparable<Key>, Value>{
 		}
 	}
 	//Constructor for DAG, not sure if this will be kept.
-	public Object DirAcycGraph(Node root) {
-		Object dirAcycGraph = new Object();
-		
-		return dirAcycGraph;
-	}
 	
 	public boolean isEmpty() { 
 		return size() == 0; 
