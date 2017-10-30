@@ -41,8 +41,11 @@ public class DAG <Value> {
 
 	// Needed a way to convert from value to a Node, so this method returns the assocaited node given a value.
 	public Node retrieveNodefromVal (Value v){
-		Node nodeToRet = new Node(null); 				
-		for (int i=0; i<nodeList.length; i++){
+		Node nodeToRet = new Node(null);
+		if (v == null) {
+			return null;
+		}
+		for (int i=0; i < nodeList.length; i++){
 			if (nodeList[i].val == v){
 				nodeToRet = nodeList[i];
 				break;			
@@ -77,7 +80,7 @@ public class DAG <Value> {
 		for(i=0; i<n.successors.length; i++) {
 			n.successors[i] = null;
 		}
-		
+
 		for(i=0; i<nodeList.length; i++) {
 			if (Arrays.asList(nodeList[i].successors).contains(n) == true) {
 				for (int j=0; j<nodeList[i].successors.length; j++) {
@@ -93,18 +96,18 @@ public class DAG <Value> {
 			}
 		}		
 	}
-	
+
 	public void addNodeToNodeList (Node n) {
 		nodeList = extendArray(nodeList);
 		nodeList[nodeList.length-1] = n;
 	}
 	// Extend the array by one element
-		@SuppressWarnings("unchecked")
-		public Node[] extendArray(Node[] originalArray) {
-			Node[] copyArray = new DAG.Node[originalArray.length+1];
-			System.arraycopy(originalArray, 0, copyArray, 0, originalArray.length);
-			return copyArray;
-		}
+	@SuppressWarnings("unchecked")
+	public Node[] extendArray(Node[] originalArray) {
+		Node[] copyArray = new DAG.Node[originalArray.length+1];
+		System.arraycopy(originalArray, 0, copyArray, 0, originalArray.length);
+		return copyArray;
+	}
 
 
 }

@@ -201,6 +201,31 @@ public class LCATest {
 		LCA.put(7, 7); 
 		assertEquals("Testing contains", true, LCA.contains(7));
 	}
-
+	
+	@Test
+	public void testDAGContains(){
+		DAG<Integer> dag = new DAG <Integer>();
+		
+		assertEquals("Checking contains() on empty dag.", false, dag.contains(10));
+		
+		dag.put(7, null, null); 		//        (7)
+		dag.put(8, 7, null);   			//   	  (7) -> (8) -> (10)
+		for(int i = 0; i<1; i++) {
+			System.out.println(dag.toString());
+		}
+		System.out.println(dag.size());
+		//assertEquals("Checking DAG contains() a particular Value.", true, dag.contains(7));
+		
+	}
+	
+	@Test
+	public void testDAGEmpty() {
+		DAG<Integer> dag = new DAG<Integer>();
+		assertEquals("Checking isEmpty() on empty dag.", true, dag.isEmpty());
+		dag.put(1, null, null);
+		//add a value 1 with null to and from pointers (its the first value)
+		System.out.println(dag.size());
+		assertEquals("Checking isEmpty() on empty dag.", false, dag.isEmpty());
+	}
 
 }
