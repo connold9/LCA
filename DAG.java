@@ -27,7 +27,25 @@ public class DAG {
 	Node root;
 	private List<Integer> path1 = new ArrayList<>();
 	private List<Integer> path2 = new ArrayList<>();
+	
+	int LCADag(Node node1, Node node2) {
+		return LCADag(root, node1, node2);
+	}
 
+	static int LCADag(Node root2, Node node1, Node node2) {
+		if (node1.parentNodes != null && node2.parentNodes != null) {
+			for (int i = 0; i < node2.parentNodes.size(); i++) {
+				for (int j = 0; j < node1.parentNodes.size(); j++) {
+					if (node2.parentNodes.get(i) == node1.parentNodes.get(j)) {
+						return node2.parentNodes.get(i).data;
+					}
+				}
+			}
+		} else {
+			return root2.data;
+		}
+		return 0;
 
+	}
 }
 
