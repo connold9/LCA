@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -5,16 +6,21 @@ import java.util.Arrays;
 //Have seen a working implementation in which root.left.right.add etc is used to add nodes, seeming simple.
 //Will do some research but may have to start from scratch again.
 
+//found a simplified Node class constructor. Will use this and try to simplify from here. Ignore the mountain of errors.
+class Node {
+	int data;
+	ArrayList<Node> parentNodes;
+	Node left;
+	Node right;
 
-public class DAG <Value> {
-	private class Node {
-		private Value val;					// Value stored in Node
-		private Node[] successors;			// Array of Nodes' successors
-
-		public Node(Value val) {
-			this.val = val;
-		}
+	Node(int value) {
+		data = value;
+		parentNodes = new ArrayList<Node>();
+		left = right;
+		left = null;
+		right = null;
 	}
+}
 
 	@SuppressWarnings("unchecked")
 	private Node[] nodeList = new DAG.Node[0];
