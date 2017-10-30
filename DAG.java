@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 //Comment: I think this may be too complex an implementation for me to manage. May have to simplify my old code.
@@ -20,9 +21,13 @@ class Node {
 		left = null;
 		right = null;
 	}
+}
 
-
-	
+public class DAG {
+	Node root;
+	private List<Integer> path1 = new ArrayList<>();
+	private List<Integer> path2 = new ArrayList<>();
 
 
 }
+

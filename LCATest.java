@@ -203,29 +203,102 @@ public class LCATest {
 	}
 	
 	@Test
-	public void testDAGContains(){
-		DAG<Integer> dag = new DAG <Integer>();
-		
-		assertEquals("Checking contains() on empty dag.", false, dag.contains(10));
-		
-		dag.put(7, null, null); 		//        (7)
-		dag.put(8, 7, null);   			//   	  (7) -> (8) -> (10)
-		for(int i = 0; i<1; i++) {
-			System.out.println(dag.toString());
-		}
-		System.out.println(dag.size());
-		//assertEquals("Checking DAG contains() a particular Value.", true, dag.contains(7));
-		
+	public void testEmptyTree() {
+		DAG emptyTree = new DAG();
+		assertEquals("The lowest common ancestor of an empty tree", -1, emptyTree.LCADag(0, 0));
 	}
-	
+
 	@Test
-	public void testDAGEmpty() {
-		DAG<Integer> dag = new DAG<Integer>();
-		assertEquals("Checking isEmpty() on empty dag.", true, dag.isEmpty());
-		dag.put(1, null, null);
-		//add a value 1 with null to and from pointers (its the first value)
-		System.out.println(dag.size());
-		assertEquals("Checking isEmpty() on empty dag.", false, dag.isEmpty());
+	public void testOneNode() {
+		DAG oneNode = new DAG();
+		oneNode.root = new Node(1);
+		assertEquals("The lowest common ancestor of a tree with one node", -1,
+				oneNode.LCADag(1, 0));
 	}
+
+	@Test
+	public void testTwoNodes() {
+		DAG twoNodes = new DAG();
+		twoNodes.root = new Node(1);
+		twoNodes.root.left = new Node(2);
+		assertEquals("The lowest common ancestor of a tree with two nodes", 1,
+				twoNodes.LCADag(1, 2));
+	}
+
+	@Test
+	public void testLargeDag() {
+		DAG largeDAG = new DAG();
+		largeDAG.root = new Node(1);
+		largeDAG.root.left = new Node(2);
+		largeDAG.root.right = new Node(3);
+		largeDAG.root.left.left = new Node(4);
+		largeDAG.root.left.right = new Node(5);
+		largeDAG.root.right.left = new Node(6);
+		largeDAG.root.right.right = new Node(7);
+		largeDAG.root.left.left.left = new Node(8);
+		largeDAG.root.left.left.right = new Node(9);
+		largeDAG.root.left.right.left = new Node(10);
+		largeDAG.root.left.right.right = new Node(11);
+		largeDAG.root.right.left.left = new Node(12);
+		largeDAG.root.right.left.right = new Node(13);
+		largeDAG.root.right.right.left = new Node(14);
+		largeDAG.root.right.right.right = new Node(15);
+
+		assertEquals("The lowest common ancestor of a large dag", 1,
+				largeDAG.LCADag(1, 2));
+		assertEquals("The lowest common ancestor of a large dag", 1,
+				largeDAG.LCADag(2, 3));
+		assertEquals("The lowest common ancestor of a large dag", 2,
+				largeDAG.LCADag(2, 4));
+		assertEquals("The lowest common ancestor of a large dag", 3,
+				largeDAG.LCADag(3, 6));
+		assertEquals("The lowest common ancestor of a large dag", 2,
+				largeDAG.LCADag(4, 5));
+		assertEquals("The lowest common ancestor of a large dag", 3,
+				largeDAG.LCADag(6, 7));
+		assertEquals("The lowest common ancestor of a large dag", 4,
+				largeDAG.LCADag(4, 8));
+		assertEquals("The lowest common ancestor of a large dag", 5,
+				largeDAG.LCADag(5, 10));
+		assertEquals("The lowest common ancestor of a large dag", 6,
+				largeDAG.LCADag(6, 12));
+		assertEquals("The lowest common ancestor of a large dag", 7,
+				largeDAG.LCADag(7, 14));
+		assertEquals("The lowest common ancestor of a large dag", 4,
+				largeDAG.LCADag(8, 9));
+		assertEquals("The lowest common ancestor of a large dag", 5,
+				largeDAG.LCADag(10, 11));
+		assertEquals("The lowest common ancestor of a large dag", 6,
+				largeDAG.LCADag(12, 13));
+		assertEquals("The lowest common ancestor of a large dag", 7,
+				largeDAG.LCADag(14, 15));
+		assertEquals("The lowest common ancestor of a large dag", 1,
+				largeDAG.LCADag(4, 12));
+		assertEquals("The lowest common ancestor of a large dag", 2,
+				largeDAG.LCADag(8, 10));
+		assertEquals("The lowest common ancestor of a large dag", 3,
+				largeDAG.LCADag(7, 13));
+
+	}
+
+	@Test
+	public void testForNonExistentNode() {
+		DAG nonExistentNode = new DAG();
+		nonExistentNode.root = new Node(1);
+		nonExistentNode.root.left = new Node(2);
+		nonExistentNode.root.right = new Node(3);
+		nonExistentNode.root.left.left = new Node(4);
+		nonExistentNode.root.left.right = new Node(5);
+		nonExistentNode.root.right.left = new Node(6);
+		nonExistentNode.root.right.right = new Node(7);
+
+		assertEquals("Testing for a non existent node in the tree", -1,
+				nonExistentNode.LCADag(1, 13));
+		assertEquals("Testing for a non existent node in the tree", -1,
+				nonExistentNode.LCADag(8, 13));
+	}
+
+	
+	
 
 }
