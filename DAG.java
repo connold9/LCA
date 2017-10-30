@@ -90,6 +90,18 @@ public class DAG {
 	public Iterable<Integer> adj(int v)
 	{ return adj[v]; }
 	
+	
+	//to find the LCA, will have to traverse the graph backwards as the lca comes before the two nodes
+    public DAG reverse() {
+        DAG reverse = new DAG(V); //new dag of same parameter
+        for (int v = 0; v < V; v++) {
+            for (int w : adj(v)) {
+                reverse.addEdge(w, v); //reverse the direction of the edges
+            }
+        }
+        return reverse;
+    }
+    
 	public ArrayList<Integer> BFS(int s)
     {
         // Mark all the vertices as not visited(By default set as false)
