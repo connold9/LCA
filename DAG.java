@@ -1,51 +1,116 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-
-//Comment: I think this may be too complex an implementation for me to manage. May have to simplify my old code.
-//Have seen a working implementation in which root.left.right.add etc is used to add nodes, seeming simple.
-//Will do some research but may have to start from scratch again.
-
-//found a simplified Node class constructor. Will use this and try to simplify from here. Ignore the mountain of errors.
-class Node {
-	int data;
-	ArrayList<Node> parentNodes;
-	Node left;
-	Node right;
-
-	Node(int value) {
-		data = value;
-		parentNodes = new ArrayList<Node>();
-		left = right;
-		left = null;
-		right = null;
-	}
-}
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class DAG {
-	Node root;
-	private List<Integer> path1 = new ArrayList<>();
-	private List<Integer> path2 = new ArrayList<>();
+	private int V;           // number of vertices in this digraph
+	private int E;                 // number of edges in this digraph
+	private ArrayList<Integer>[] adj;    // adj[v] = adjacency list for vertex v
+	private int[] indegree;        // indegree[v] = indegree of vertex v
+	private boolean marked[];		//Boolean List to track visited vertices
+	private boolean hasCycle;		//True if cycle in graph
+    private boolean stack[];		//Order that vertices were visited
+    private int[] edgeTo;      // edgeTo[v] = last edge on shortest s->v path
+    private int[] distTo;      // distTo[v] = length of shortest s->v path
+
+    
+
+
 	
-	int LCADag(Node node1, Node node2) {
-		return LCADag(root, node1, node2);
+	public DAG(int V)
+	{
+		if (V < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
+	    this.V = V;
+	    this.E = 0;
+	    indegree = new int[V];
+	    marked = new boolean[V];
+	    stack = new boolean[V];
+	    adj = (ArrayList<Integer>[]) new ArrayList[V];
+	    for (int v = 0; v < V; v++) {
+	        adj[v] = new ArrayList<Integer>();
+	    }              
 	}
 
-	static int LCADag(Node root2, Node node1, Node node2) {
-		if (node1.parentNodes != null && node2.parentNodes != null) {
-			for (int i = 0; i < node2.parentNodes.size(); i++) {
-				for (int j = 0; j < node1.parentNodes.size(); j++) {
-					if (node2.parentNodes.get(i) == node1.parentNodes.get(j)) {
-						return node2.parentNodes.get(i).data;
-					}
-				}
-			}
-		} else {
-			return root2.data;
+	//Returns current vertex
+	public int V() {
+		return V;	
+	}
+	
+	public int E() {
+        return E;
+    }
+
+	
+	
+	//Adds a directed edge from v->w
+	public void addEdge(int v, int w)
+	{
+	    if((validateVertex(v)>0)&&(validateVertex(w)>0))
+	    {
+	    	adj[v].add(w);
+	    	indegree[w]++;
+	    	E++;
+	    }
+	    else{
+	    	System.out.println("Please enter vertices between 0 & n-1");
+	    }
+	    	
+	}
+	
+	private int validateVertex(int v) {
+        if (v < 0 || v >= V)
+        	return -1;
+        else
+        	return 1;}
+
+	
+	//Returns amount of directed edges incident to vertex v
+	public int indegree(int v) {
+		if(validateVertex(v)<0){
+			return -1;
 		}
-		return 0;
-
+		else{
+			return indegree[v];
+		}
 	}
-}
+	
+	//Returns amount of directed edges from vertex v
+	public int outdegree(int v) {
+		if(validateVertex(v)<0){
+			return -1;
+		}
+		else{
+			return adj[v].size();
+		}
+    }
+		
+	
+	//Returns the adjacent vertices to v
+	public Iterable<Integer> adj(int v)
+	{ return adj[v]; }
+	
+	
+	
+	public boolean hasCycle() {
 
+        return hasCycle;
+    }
+	
+	 public void findCycle(int v) {
+
+	        marked[v] = true;
+	        stack[v] = true;
+
+	        for (int w : adj(v)) {
+	            if(!marked[w]) {
+	                findCycle(w);
+	            } else if (stack[w]) {
+	                hasCycle = true;
+	                return;
+	            }
+	        }
+
+	        stack[v] = false;
+	    }
+}

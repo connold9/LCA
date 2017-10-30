@@ -202,102 +202,52 @@ public class LCATest {
 		assertEquals("Testing contains", true, LCA.contains(7));
 	}
 	
-	@Test
-	public void testEmptyTree() {
-		DAG emptyTree = new DAG();
-		assertEquals("The lowest common ancestor of an empty tree", -1, emptyTree.LCADag(0, 0));
-	}
-
-	@Test
-	public void testOneNode() {
-		DAG oneNode = new DAG();
-		oneNode.root = new Node(1);
-		assertEquals("The lowest common ancestor of a tree with one node", -1,
-				oneNode.LCADag(1, 0));
-	}
-
-	@Test
-	public void testTwoNodes() {
-		DAG twoNodes = new DAG();
-		twoNodes.root = new Node(1);
-		twoNodes.root.left = new Node(2);
-		assertEquals("The lowest common ancestor of a tree with two nodes", 1,
-				twoNodes.LCADag(1, 2));
-	}
-
-	@Test
-	public void testLargeDag() {
-		DAG largeDAG = new DAG();
-		largeDAG.root = new Node(1);
-		largeDAG.root.left = new Node(2);
-		largeDAG.root.right = new Node(3);
-		largeDAG.root.left.left = new Node(4);
-		largeDAG.root.left.right = new Node(5);
-		largeDAG.root.right.left = new Node(6);
-		largeDAG.root.right.right = new Node(7);
-		largeDAG.root.left.left.left = new Node(8);
-		largeDAG.root.left.left.right = new Node(9);
-		largeDAG.root.left.right.left = new Node(10);
-		largeDAG.root.left.right.right = new Node(11);
-		largeDAG.root.right.left.left = new Node(12);
-		largeDAG.root.right.left.right = new Node(13);
-		largeDAG.root.right.right.left = new Node(14);
-		largeDAG.root.right.right.right = new Node(15);
-
-		assertEquals("The lowest common ancestor of a large dag", 1,
-				largeDAG.LCADag(1, 2));
-		assertEquals("The lowest common ancestor of a large dag", 1,
-				largeDAG.LCADag(2, 3));
-		assertEquals("The lowest common ancestor of a large dag", 2,
-				largeDAG.LCADag(2, 4));
-		assertEquals("The lowest common ancestor of a large dag", 3,
-				largeDAG.LCADag(3, 6));
-		assertEquals("The lowest common ancestor of a large dag", 2,
-				largeDAG.LCADag(4, 5));
-		assertEquals("The lowest common ancestor of a large dag", 3,
-				largeDAG.LCADag(6, 7));
-		assertEquals("The lowest common ancestor of a large dag", 4,
-				largeDAG.LCADag(4, 8));
-		assertEquals("The lowest common ancestor of a large dag", 5,
-				largeDAG.LCADag(5, 10));
-		assertEquals("The lowest common ancestor of a large dag", 6,
-				largeDAG.LCADag(6, 12));
-		assertEquals("The lowest common ancestor of a large dag", 7,
-				largeDAG.LCADag(7, 14));
-		assertEquals("The lowest common ancestor of a large dag", 4,
-				largeDAG.LCADag(8, 9));
-		assertEquals("The lowest common ancestor of a large dag", 5,
-				largeDAG.LCADag(10, 11));
-		assertEquals("The lowest common ancestor of a large dag", 6,
-				largeDAG.LCADag(12, 13));
-		assertEquals("The lowest common ancestor of a large dag", 7,
-				largeDAG.LCADag(14, 15));
-		assertEquals("The lowest common ancestor of a large dag", 1,
-				largeDAG.LCADag(4, 12));
-		assertEquals("The lowest common ancestor of a large dag", 2,
-				largeDAG.LCADag(8, 10));
-		assertEquals("The lowest common ancestor of a large dag", 3,
-				largeDAG.LCADag(7, 13));
-
-	}
-
-	@Test
-	public void testForNonExistentNode() {
-		DAG nonExistentNode = new DAG();
-		nonExistentNode.root = new Node(1);
-		nonExistentNode.root.left = new Node(2);
-		nonExistentNode.root.right = new Node(3);
-		nonExistentNode.root.left.left = new Node(4);
-		nonExistentNode.root.left.right = new Node(5);
-		nonExistentNode.root.right.left = new Node(6);
-		nonExistentNode.root.right.right = new Node(7);
-
-		assertEquals("Testing for a non existent node in the tree", -1,
-				nonExistentNode.LCADag(1, 13));
-		assertEquals("Testing for a non existent node in the tree", -1,
-				nonExistentNode.LCADag(8, 13));
-	}
-
+	//Following tests check Directed Graph class works correctly
+		@Test
+		public void testForDirectedGraph(){
+			DAG test = new DAG(10);
+			test.addEdge(1, 2);
+			test.addEdge(1, 3);
+			test.addEdge(3, 4);
+			test.addEdge(4, 5);
+			test.addEdge(4, 6);
+			
+			assertEquals("", 1, test.indegree(4));
+			assertEquals("", 2, test.outdegree(4));
+			assertEquals("", 5, test.E());
+			assertEquals("", 10, test.V());
+			String ans = "[5, 6]";
+			assertEquals("",ans, test.adj(4).toString());
+		}
+		
+		
+		@Test
+		public void testAddEdge(){
+			DAG test4 = new DAG(5);
+			test4.addEdge(3, 9);
+			test4.addEdge(-2, -5);	
+		}
+		
+		@Test
+		public void testinDegree(){
+			DAG test5 = new DAG(5);
+			assertEquals("", -1, test5.indegree(-3));
+		}
+		
+		@Test
+		public void testOutDegree(){
+			DAG test6 = new DAG(5);
+			assertEquals("", -1, test6.outdegree(8));	
+		}
+		
+		
+		@Test(expected=Exception.class)
+		public void exceptionTest(){
+			//Can't make a directed graph with less than 0 vertices
+			DAG test3 = new DAG(-5);
+		}
+		
+		
 	
 	
 
