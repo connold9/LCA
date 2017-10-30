@@ -1,5 +1,11 @@
 import java.util.Arrays;
 
+
+//Comment: I think this may be too complex an implementation for me to manage. May have to simplify my old code.
+//Have seen a working implementation in which root.left.right.add etc is used to add nodes, seeming simple.
+//Will do some research but may have to start from scratch again.
+
+
 public class DAG <Value> {
 	private class Node {
 		private Value val;					// Value stored in Node
