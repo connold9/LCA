@@ -96,20 +96,26 @@ public class DAG {
 			//Graph is not a DAG
 			return -1;
 		}
+		//Reverse the dag, allows easier traversal
 		DAG backwards = reverse();
-		ArrayList<Integer> arr1 = backwards.BFS(v);
-		ArrayList<Integer> arr2 = backwards.BFS(w);
+		
+		//Locate the two points in the graph
+		ArrayList<Integer> vPath = backwards.BFS(v);
+		ArrayList<Integer> wPath = backwards.BFS(w);
 		ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
 		boolean found = false;
-		for(int i = 0; i<arr1.size(); i++){
-				for(int t = 0; t<arr2.size(); t++){		
-					if(arr1.get(i)==arr2.get(t)){
-						commonAncestors.add(arr1.get(i));	
+		
+		//cycle through the BFS paths, adding all common ancestors to the arrayList
+		//return the first one found, as it is the closest to the nodes.
+		for(int i = 0; i<vPath.size(); i++){
+				for(int t = 0; t<wPath.size(); t++){		
+					if(vPath.get(i)==wPath.get(t)){
+						commonAncestors.add(vPath.get(i));	
 						found = true;
 					}
 			}
 		}
-		
+		//return -1 in any case where no lca is found (empty dag etc)
 		if(found)
 			return commonAncestors.get(0);
 		else
