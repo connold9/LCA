@@ -3,6 +3,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class LCATest {
+	
+	
 
 	@Test
 	public void testLCA() {
@@ -191,6 +193,8 @@ public class LCATest {
 		LCA.put(7, 7); 
 		assertEquals("Testing contains", true, LCA.contains(7));
 	}
-
+	
+	
+	
 
 }

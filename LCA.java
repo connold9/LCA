@@ -1,8 +1,13 @@
+import java.util.ArrayList;
 
 public class LCA <Key extends Comparable<Key>, Value>{
 
 
-	Node root;             				
+	//public LinkedHashSet<Key> keySet = new LinkedHashSet<Key>();	// all nodes in graph
+	//private LinkedHashSet<Key> orphanSet = new LinkedHashSet<Key>();	// all nodes with no requirement nodes
+	
+	Node root;
+
 
 	class Node {
 		private Key key;           				
@@ -17,6 +22,15 @@ public class LCA <Key extends Comparable<Key>, Value>{
 		}
 
 	}
+	
+	class DAG {
+		private Node root;
+		public DAG(Node root) {
+			this.root = root;
+		}
+	}
+	//Constructor for DAG, not sure if this will be kept.
+	
 	public boolean isEmpty() { 
 		return size() == 0; 
 	}
@@ -87,6 +101,8 @@ public class LCA <Key extends Comparable<Key>, Value>{
 		node.N = 1 + size(node.left) + size(node.right); // value child1 + value child2 + 1
 		return node;
 	}
+	
+
 
 	/**
 	 * Tree height.
@@ -305,5 +321,6 @@ public class LCA <Key extends Comparable<Key>, Value>{
 	   
 	         return node.key;
 	 	}
+	 	
 	
 }
